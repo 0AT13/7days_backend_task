@@ -14,6 +14,7 @@ class TimeData
 
     /**
      * @Assert\Timezone()
+     * @Assert\NotBlank()
      */
     private string $timezone;
 
