@@ -8,10 +8,15 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateRandomPostCommand extends Command
+/**
+ * ### Test Task 2 ###
+ * I think in this situation is better to create another one command for fourth post with specific requirements for post
+ * creation, so we can configure cron job to generate each day additional post at 12 PM and not affect any other logic
+ */
+class GenerateDailyExtraPostCommand extends Command
 {
-    protected static $defaultName = 'app:generate-random-post';
-    protected static $defaultDescription = 'Run app:generate-random-post';
+    protected static $defaultName = 'app:generate-daily-extra-post';
+    protected static $defaultDescription = 'Test Task 2: Run app:generate-daily-extra-post';
 
     private PostManager $postManager;
     private LoremIpsum $loremIpsum;
@@ -29,8 +34,9 @@ class GenerateRandomPostCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $title = $this->loremIpsum->words(mt_rand(4, 6));
-        $content = $this->loremIpsum->paragraphs(2);
+        $date = (new \DateTime('now'))->format('Y-m-d');
+        $title = "Summary $date";
+        $content = $this->loremIpsum->paragraphs();
 
         $this->postManager->addPost($title, $content);
 

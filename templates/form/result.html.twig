@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Time count{% endblock %}
+
+{% block body %}
+    The time zone {{ timezone }} has {{ offsetMinutes }} minutes offset to UTC on the given day at noon.<br />
+    February in this year is {{ februaryLength }} days long.<br />
+    The specified month {{ monthName }} is {{ daysInMonth }} days long.
+
+    <br>
+    <a href="{{ path('app_form') }}">Go back</a>
+{% endblock %}
